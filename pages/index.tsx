@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import { getCharacter } from './api/rickAndMorty';
+import { getCharacterByName } from './api/rickAndMorty';
 import { createContext, useContext, useState } from 'react';
 import { BsSearch, BsController } from 'react-icons/bs';
 import Link from 'next/link';
@@ -20,14 +20,17 @@ interface Character {
 export const CharacterContext = createContext<Character[]>([]);
 
 export default function Home() {
-  const [characterId, setCharacterId] = useState('');
+  const [characterId, setCharacterId] = useState<string>('');
   const [characterInfo, setCharacterInfo] = useState<Character[]>([]);
-  const router = useRouter();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const character = await getCharacter(characterId);
-    setCharacterInfo(character);
+    const character: Character[] | undefined = await getCharacterByName(characterId);
+    if (character !== undefined) {
+      setCharacterInfo(character);
+    } else {
+      console.error('O valor de character é undefined');
+    }
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,9 +40,9 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col justify-between items-center">
       <div className="bg-gray-200 fixed right-3 h-auto flex items-center top-2/4 p-2 rounded">
-        <button onClick={() => router.push('/quiz')}>
+        <Link href='/games/gamesList'>
           <BsController className="text-4xl" />
-        </button>
+        </Link>
       </div>
 
       <h1 className="text-4xl mt-4">Rick and Morty Character Finder</h1>

@@ -1,4 +1,4 @@
-import { liveOrDead } from "./api/rickAndMorty"
+import { getCharacterById } from "../api/rickAndMorty"
 import { useState } from "react"
 
 import Image from 'next/image';
@@ -18,24 +18,22 @@ export default function Quiz() {
   const [character, setCharacter] = useState<Character | null>(null);
   const [points, setPoints] = useState<number>(0)
 
-const randomCharacter = async () => {
-    const characterData = await liveOrDead()
-    setCharacter(characterData);
-    console.log(character)
-}
+  const randomCharacter = async () => {
+      const characterData: Character = await getCharacterById()
+      setCharacter(characterData);
+  }
 
-const addPontuation = (response: 'Alive' | 'Dead') => {
-    if (character && character.status === response) {
-    setPoints(points + 1);
-    console.log(points)
-    }
-}
+  const addPontuation = (response: 'Alive' | 'Dead') => {
+      if (character && character.status === response) {
+      setPoints(points + 1);
+      }
+  }
     
     return(
         <main className="flex min-h-screen flex-col justify-between items-center">
 
         <div className="flex mt-3 text-3xl">
-            <Link href="/">
+            <Link href="/games/gamesList">
                 <BsArrowLeftCircle className="absolute top-0 left-0 mt-3 ml-3 text-3xl" />
             </Link>
             <FaHeartbeat className="mt-1" />
