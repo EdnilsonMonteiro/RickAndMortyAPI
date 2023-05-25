@@ -67,7 +67,7 @@ function sortSpecies(character: Character): Species[] {
                 <BsArrowLeftCircle className="absolute top-0 left-0 mt-3 ml-3 text-3xl" />
             </Link>
             <RiAliensFill className="mt-1" />
-            <h1 className="mx-5">What's the specie?</h1>
+            <h1 className="mx-5">What&apos;s the specie?</h1>
             <GiAnimalSkull className="mt-1"/>
         </div>
 

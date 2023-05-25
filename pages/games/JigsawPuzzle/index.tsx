@@ -10,7 +10,7 @@ import { getRandomImage } from '../../api/rickAndMorty'
 import Puzzle from '../../components/Puzzle/Puzzle';
 import { splitImage } from '../../api/splitImage'
 
-export default function jigsawPuzzle() {
+export default function JigsawPuzzle() {
 
   const [pieces, setPieces] = useState<object | unknown>([])
   const [completeImage, setCompleteImage] = useState<string>('');

@@ -41,7 +41,7 @@ export default function gamesList() {
         <div className={`border-2 border-gray-300 rounded-md bg-blue-500 hover:bg-blue-600 hover:border-black transition duration-300 ease-in-out p-2 text-center`}>
           <button className='flex w-200 text-white justify-center mb-3'>
             <RiAliensFill className="mr-1 mt-1"/>
-              <h1>What's the specie?</h1>
+              <h1>What&apos;s the specie?</h1>
             <GiAnimalSkull className="ml-1 mt-1"/>
           </button>
 
