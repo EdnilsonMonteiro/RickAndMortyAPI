@@ -1,10 +1,11 @@
-import { getCharacterById } from "../api/rickAndMorty"
+import { getCharacterById } from "../../api/rickAndMorty"
 import { useState } from "react"
 
 import Image from 'next/image';
 import Link from 'next/link';
 import { BsArrowLeftCircle } from 'react-icons/bs';
 import { FaHeartbeat, FaGhost } from 'react-icons/fa';
+import PlayButton from "@/pages/components/PlayButton";
 
 interface Character {
   id: number;
@@ -37,12 +38,12 @@ export default function Quiz() {
                 <BsArrowLeftCircle className="absolute top-0 left-0 mt-3 ml-3 text-3xl" />
             </Link>
             <FaHeartbeat className="mt-1" />
-            <h1 className="mx-5">Vivo ou morto</h1>
+              <h1 className="mx-5">Alive or Dead</h1>
             <FaGhost className="mt-1"/>
         </div>
 
         {!character &&
-            <button className="text-3xl bg-green-300 p-4 rounded-lg" onClick={randomCharacter}>Começar jogo</button>
+            <PlayButton startGame={randomCharacter} />
         }
         
 
@@ -59,11 +60,11 @@ export default function Quiz() {
 
                 </div>
 
-                <h4 className="my-4 flex justify-center text-lg">Pontuação: {points}</h4>
+                <h4 className="my-4 flex justify-center text-lg">Score: {points}</h4>
 
                 <div className="flex justify-around mt-4">
-                    <button onClick={() => {addPontuation('Alive'); randomCharacter()}} className="text-white bg-green-500 p-2 rounded-lg">VIVO</button>
-                    <button onClick={() => {addPontuation('Dead'); randomCharacter()}} className="text-white bg-red-500 p-2 rounded-lg">MORTO</button>
+                    <button onClick={() => {addPontuation('Alive'); randomCharacter()}} className="text-white bg-green-500 p-2 rounded-lg">ALIVE</button>
+                    <button onClick={() => {addPontuation('Dead'); randomCharacter()}} className="text-white bg-red-500 p-2 rounded-lg">DEAD</button>
                 </div>
               </div>
         }

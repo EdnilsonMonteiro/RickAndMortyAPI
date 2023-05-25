@@ -1,10 +1,13 @@
-import { getCharacterById } from "../api/rickAndMorty"
+import { getCharacterById } from "../../api/rickAndMorty"
 import shuffle from 'lodash/shuffle';
 import { useState } from "react"
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { BsArrowLeftCircle, BsEgg, BsTrophy } from 'react-icons/bs';
+import { BsArrowLeftCircle } from 'react-icons/bs';
+import { GiAnimalSkull } from "react-icons/gi";
+import { RiAliensFill } from "react-icons/ri";
+import PlayButton from "@/pages/components/PlayButton";
 
 interface Character {
   id: number;
@@ -63,13 +66,13 @@ function sortSpecies(character: Character): Species[] {
             <Link href="/games/gamesList">
                 <BsArrowLeftCircle className="absolute top-0 left-0 mt-3 ml-3 text-3xl" />
             </Link>
-            <BsEgg className="mt-1" />
-            <h1 className="mx-5">Qual a espécie?</h1>
-            <BsTrophy className="mt-1"/>
+            <RiAliensFill className="mt-1" />
+            <h1 className="mx-5">What's the specie?</h1>
+            <GiAnimalSkull className="mt-1"/>
         </div>
 
         {!character &&
-            <button className="text-3xl bg-green-300 p-4 rounded-lg" onClick={() => {randomCharacter()}}>Começar jogo</button>
+            <PlayButton startGame={randomCharacter} />
         }  
 
         {character && (
@@ -82,7 +85,7 @@ function sortSpecies(character: Character): Species[] {
                 <h4>{character.name}</h4>
               </div>
             </div>
-            <h4 className="my-4 flex justify-center text-lg">Pontuação: {points}</h4>
+            <h4 className="my-4 flex justify-center text-lg">Score: {points}</h4>
             <div className="flex justify-around mt-4 flex-wrap">
               {showSpecies.map((specie) => (
                 <button key={specie} onClick={() => addPontuation(specie)} className="text-white bg-green-500 p-2 rounded-lg my-1 hover:bg-green-400">

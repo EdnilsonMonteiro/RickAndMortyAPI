@@ -1,0 +1,21 @@
+
+  .puzzle {
+    display: flex;
+    flex-wrap: wrap;
+    width: 300px;
+    height: 300px;
+  }
+  
+  .tile {
+    flex: 1 0 33.33%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    font-size: 24px;
+  }
+
+  .empty {
+    background-color: #c9c9c9; /* ou qualquer outra cor para destacar */
+  }

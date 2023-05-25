@@ -50,7 +50,7 @@ export default function Home() {
       <form className="flex items-center mt-4" onSubmit={handleSubmit}>
         <label className="mb-2 text-lg">
           <input
-            placeholder="Nome do(a) personagem"
+            placeholder="Character's name"
             className="ml-2 p-2 border border-gray-300 rounded-md"
             type="text"
             value={characterId}
@@ -58,13 +58,12 @@ export default function Home() {
           />
         </label>
         <button className="mb-2 bg-gray-400 p-2 rounded ml-3 text-lg flex" type="submit">
-          <BsSearch className="mr-2 ml-1 mt-1" /> Buscar
+          <BsSearch className="mr-2 ml-1 mt-1" /> Search
         </button>
       </form>
 
       <hr className="border border-black w-4/5 my-7" />
 
-      {characterInfo && <h1 className='text-3xl'>Resultados:</h1> }
       <div className="flex flex-wrap justify-around">
         {characterInfo && characterInfo.length  > 0 ? (
           characterInfo.map((character) => {
@@ -79,10 +78,10 @@ export default function Home() {
                   <div className='flex justify-center mb-3'>
                     <h4>{character.name}</h4>
                   </div>
-                  <h4>Gênero: {character.gender}</h4>
-                  <h4>Espécie: {character.species} {character.type && "/"} {character.type}</h4>
+                  <h4>Gender: {character.gender}</h4>
+                  <h4>Specie: {character.species} {character.type && "/"} {character.type}</h4>
                   <h4 className='flex'>
-                    Status: <p className={`${character.status === "Alive" ? "text-green-500" : "text-red-500"}`}>{character.status === "Alive" ? " Vivo" : " Morto"}</p>
+                    Status: <p className={`${character.status === "Alive" ? "text-green-500" : "text-red-500"}`}> {character.status}</p>
                   </h4>
                 </div>
               </div>
@@ -91,7 +90,7 @@ export default function Home() {
         })
       ) : (
         <div className='mb-60 text-4xl'>
-          <p>Nenhum personagem encontrado</p>
+          <p>No characters found</p>
         </div>
       )}
         </div>

@@ -58,3 +58,21 @@ export const getCharactersById = async () => {
 
   return charactersList
 }
+
+export const getRandomImage = async () => {
+  let response: AxiosResponse<Character> | null = null;
+
+  while (response === null || response.data.status === "unknown") {
+    const randomId: number = Math.floor(Math.random() * 671) + 1;
+
+    try {
+      const res: AxiosResponse<Character> = await axios.get(`https://rickandmortyapi.com/api/character/${randomId}`);
+      response = res;
+      const imageUrl = response.data.image;
+
+      return imageUrl;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+};

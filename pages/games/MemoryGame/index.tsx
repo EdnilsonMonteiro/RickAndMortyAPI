@@ -1,12 +1,14 @@
 'use client'
 
-import { getCharactersById } from "../api/rickAndMorty"
+import { getCharactersById } from "../../api/rickAndMorty"
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { BsArrowLeftCircle } from 'react-icons/bs';
 import Link from 'next/link';
 
 import styles from './memoryGame.module.css';
+import { GiCardPickup, GiCardRandom } from "react-icons/gi";
+import PlayButton from "@/pages/components/PlayButton";
 
 interface Character {
   id:number;
@@ -22,7 +24,6 @@ export default function MemoryGame() {
 
   const [flippedCards, setFlippedCards] = useState<number[]>([]); //irá guarda os index das primeiras duas cartas viradas
   const [matchedCards, setMatchedCards] = useState<number[]>([]); //guardará os index das cartas determinadas como correspondentes
-  const [score, setScore] = useState<number>(0) 
   const [moves, setMoves] = useState<number>(0) //Conta a quantidade de movimentos do usuário
   const [time, setTime] = useState<number>(0) //Conta a quantidade de tempo do usuário
   const [finalTime, setFinalTime] = useState<number | null>(null); //Valor que define o tempo em que o usuário terminou o jogo
@@ -75,7 +76,6 @@ export default function MemoryGame() {
         const secondIndex: number = index;
         if(shuffledCards[firstIndex].id === shuffledCards[secondIndex].id) {
           setMatchedCards((prev) => [...prev, firstIndex, secondIndex])
-          setScore(score + 1)
         }
         setFlippedCards([...flippedCards, index]);
       } else if(flippedCards.length === 2) {
@@ -124,11 +124,13 @@ export default function MemoryGame() {
             <Link href="/games/gamesList">
                 <BsArrowLeftCircle className="absolute top-0 left-0 mt-3 ml-3 text-3xl" />
             </Link>
-            <h1 className="mx-5">Memory Game</h1>
+            <GiCardPickup className="mt-1"/>
+              <h1 className="mx-5">Memory Game</h1>
+            <GiCardRandom className="mt-1"/>
         </div>
 
         {gameOver &&
-          <button className="text-3xl bg-green-300 p-4 rounded-lg" onClick={() => {startGame()}}>Start Game</button>
+          <PlayButton startGame={startGame} />
         }
 
         <div className={`grid grid-cols-4 lg:grid-cols-5 sm:grid-cols-4 gap-0.5`}>
@@ -164,7 +166,7 @@ export default function MemoryGame() {
           <div className="flex text-lg mb-10">
             <h1>Moves: {moves}</h1>
             <h1 className="mx-10">Time: {currentTime}</h1>
-            {matchedCards.length === 20 && <h1>Pontuação: {((1 /((2 * moves) + currentTime)) * 1000).toFixed(1)}</h1>}
+            {matchedCards.length === 20 && <h1>Score: {((1 /((2 * moves) + currentTime)) * 1000).toFixed(1)}</h1>}
             
           </div>
         </>
